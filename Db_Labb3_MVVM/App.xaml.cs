@@ -12,7 +12,29 @@ namespace Db_Labb3_MVVM
     {
         public static IHost AppHost { get; private set; }
 
+        public App()
+        {
+            //Sätta upp alla beroenden och instansieringar
+            AppHost = Host.CreateDefaultBuilder()
+                
+                .Build();
+        }
 
+        protected override async void OnStartup(StartupEventArgs e)
+        {   
+            AppHost.StartAsync();
+
+            //Sätta upp MainWindow
+
+            base.OnStartup(e);
+        }
+
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            await AppHost.StopAsync();
+
+            base.OnExit(e);
+        }
     }
 
 }
