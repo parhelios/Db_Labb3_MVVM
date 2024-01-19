@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using Db_Labb3_MVVM.Extensions;
 using Db_Labb3_MVVM.Managers.Interfaces;
 using Db_Labb3_MVVM.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,7 +24,7 @@ namespace Db_Labb3_MVVM
                 {
                     services.AddSingleton<IDataManager, IDataManager>();
 
-
+                    services.AddViewModelFactory<>();
 
                     services.AddSingleton<MainWindow>();
                 })
