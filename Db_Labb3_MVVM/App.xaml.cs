@@ -23,6 +23,8 @@ namespace Db_Labb3_MVVM
                 {
                     services.AddSingleton<IDataManager, IDataManager>();
 
+
+
                     services.AddSingleton<MainWindow>();
                 })
                 .Build();
@@ -33,7 +35,8 @@ namespace Db_Labb3_MVVM
             AppHost.StartAsync(); 
 
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = new MainWindowViewModel(AppHost.Services.GetRequiredService<IDataManager>());
+            mainWindow.DataContext = new MainWindowViewModel(
+                AppHost.Services.GetRequiredService<IDataManager>());
 
             mainWindow.Show();
 
