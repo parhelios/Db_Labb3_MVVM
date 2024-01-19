@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows;
 using Db_Labb3_MVVM.Extensions;
 using Db_Labb3_MVVM.Managers.Interfaces;
+using Db_Labb3_MVVM.Services;
 using Db_Labb3_MVVM.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,9 +23,9 @@ namespace Db_Labb3_MVVM
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<IDataManager, IDataManager>();
+                    services.AddSingleton<IDataManager, DataManager>();
 
-                    services.AddViewModelFactory<>();
+                    services.AddViewModelFactory<MainWindowViewModel>();
 
                     services.AddSingleton<MainWindow>();
                 })
@@ -33,11 +34,10 @@ namespace Db_Labb3_MVVM
 
         protected override async void OnStartup(StartupEventArgs e)
         {   
-            AppHost.StartAsync(); 
+            await AppHost.StartAsync(); 
 
             var mainWindow = AppHost.Services.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = new MainWindowViewModel(
-                AppHost.Services.GetRequiredService<IDataManager>());
+            mainWindow.DataContext = AppHost.Services.GetRequiredService<MainWindowViewModel>();
 
             mainWindow.Show();
 
