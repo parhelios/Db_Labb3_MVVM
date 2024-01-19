@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Windows.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Db_Labb3_MVVM.Managers.Interfaces;
 using Db_Labb3_MVVM.Models;
 using ZstdSharp.Unsafe;
@@ -11,12 +12,14 @@ public class MainWindowViewModel : ObservableObject
 
     private readonly DataModel _dataModel;
 
-    private int _counter;
-
     public int Counter
     {
-        get => _counter;
-        set => SetProperty(ref _counter, value);
+        get => _dataModel.Counter;
+        set => SetProperty(
+            _dataModel.Counter, 
+            value, 
+            _dataModel, 
+            (model, value) => model.Counter = value);
     }
 
     public MainWindowViewModel(IDataManager dataManager)
