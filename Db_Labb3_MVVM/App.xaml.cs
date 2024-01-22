@@ -23,9 +23,13 @@ namespace Db_Labb3_MVVM
             AppHost = Host.CreateDefaultBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddSingleton<IDataManager, DataManager>();
+                    services.AddScoped<IDataManager, DataManager>();
+                    services.AddScoped<INavigationManager, NavigationManager>();
 
                     services.AddViewModelFactory<MainWindowViewModel>();
+                    services.AddViewModelFactory<LeftViewModel>();
+                    services.AddViewModelFactory<CenterViewModel>();
+                    //services.AddViewModelFactory<RightViewModel>();
 
                     services.AddSingleton<MainWindow>();
                 })
