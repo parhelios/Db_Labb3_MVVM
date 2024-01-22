@@ -8,8 +8,9 @@ public class MainWindowViewModel : ObservableObject
 {
     private readonly IDataManager _dataManager;
     private readonly INavigationManager _navigationManager;
-
     private readonly DataModel _dataModel;
+
+    public ObservableObject CurrentViewModel => _navigationManager.CurrentViewModel;
 
     public int Counter
     {
@@ -26,5 +27,12 @@ public class MainWindowViewModel : ObservableObject
         _dataManager = dataManager;
         _navigationManager = navigationManager;
         _dataModel = _dataManager.DataModel; 
+
+        _navigationManager.CurrentViewModelChanged += OnCurrentViewModelChanged;
+    }
+
+    private void OnCurrentViewModelChanged()
+    {
+        OnPropertyChanged(nameof(CurrentViewModel));
     }
 }

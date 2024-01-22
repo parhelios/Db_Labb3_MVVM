@@ -13,6 +13,6 @@
     FontSize="30"
     mc:Ignorable="d">
     <Grid>
-
+        <ContentControl Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>
