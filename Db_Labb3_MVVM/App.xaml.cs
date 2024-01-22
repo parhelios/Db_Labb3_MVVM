@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using Db_Labb3_MVVM.Extensions;
 using Db_Labb3_MVVM.Managers.Interfaces;
 using Db_Labb3_MVVM.Services;

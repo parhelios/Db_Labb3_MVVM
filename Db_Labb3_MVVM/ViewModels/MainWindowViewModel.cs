@@ -1,14 +1,13 @@
-﻿using System.Windows.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Db_Labb3_MVVM.Managers.Interfaces;
 using Db_Labb3_MVVM.Models;
-using ZstdSharp.Unsafe;
 
 namespace Db_Labb3_MVVM.ViewModels;
 
 public class MainWindowViewModel : ObservableObject
 {
     private readonly IDataManager _dataManager;
+    private readonly INavigationManager _navigationManager;
 
     private readonly DataModel _dataModel;
 
@@ -22,9 +21,10 @@ public class MainWindowViewModel : ObservableObject
             (model, value) => model.Counter = value);
     }
 
-    public MainWindowViewModel(IDataManager dataManager)
+    public MainWindowViewModel(IDataManager dataManager, INavigationManager navigationManager)
     {
         _dataManager = dataManager;
+        _navigationManager = navigationManager;
         _dataModel = _dataManager.DataModel; 
     }
 }
