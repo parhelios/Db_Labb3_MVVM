@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Db_Labb3_MVVM.Factories.Interfaces;
 using Db_Labb3_MVVM.Managers.Interfaces;
 using Db_Labb3_MVVM.Models;
 
@@ -22,11 +23,13 @@ public class MainWindowViewModel : ObservableObject
             (model, value) => model.Counter = value);
     }
 
-    public MainWindowViewModel(IDataManager dataManager, INavigationManager navigationManager)
+    public MainWindowViewModel(IDataManager dataManager, INavigationManager navigationManager, IViewModelFactory<CenterViewModel> centerFactory)
     {
         _dataManager = dataManager;
         _navigationManager = navigationManager;
         _dataModel = _dataManager.DataModel; 
+
+        _navigationManager.CurrentViewModel = centerFactory.Create();
 
         _navigationManager.CurrentViewModelChanged += OnCurrentViewModelChanged;
     }
